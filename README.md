@@ -19,7 +19,7 @@ Then, for each instance, we would calculate a score for each label $s_l$:
 ```math
 s_l = \sum_{i=1}^{k_l}{c_{i}^{l}\text{sign}(\mathbf{v}_{i}^{l} \cdot \mathbf{x})}
 ```
-where
+where:
 1. $k_l$ represents $k$ errors for label $l$
 2. $c_{i}^{l}$ represents the $c$ correct training samples before the 
 $i$-th error (and after the $(i-1)$-th error) for label $l$
