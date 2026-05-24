@@ -36,7 +36,7 @@ The `plot_calibration` function uses the `get_error_rates` helper to enforce sam
 ## Usage
 Run the notebook cells sequentially. The main execution block will automatically fetch the MNIST dataset, iterate through digits (0-9), binarize the labels for the specific task, train the Voted Perceptron across defined polynomial degrees, and output the calibration plots for analysis.
 
-# voted=perceptron-for-experiment
+# voted-perceptron-for-experiment
 
 ## Overview
 This notebook contains an extensive empirical evaluation of the Voted Perceptron algorithm and its kernelized variants, applied to the MNIST dataset. 
