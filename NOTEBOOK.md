@@ -1,4 +1,4 @@
-# voteed-perceptron-binary.ipynb
+# voted-perceptron-binary.ipynb
 
 ## Overview
 This notebook contains an empirical implementation of the Kernel Voted Perceptron algorithm, applied to the MNIST dataset for one-vs-all binary classification. 
@@ -14,7 +14,7 @@ Designed as a framework for theoretical machine learning exploration, the notebo
 ## How it Works
 
 ### 1. Optimized Training Pipeline
-The `train_voted_perceptron_binary` function implements the core algorithm. To optimize execution speed during training, it avoids computing full kernels immediately. Instead, it pre-allocates memory arrays (`M_x_arr`, `M_y_arr`) to efficiently track mistakes and updates the survival times (the `C` array) for each constituent perceptron.
+The `train_voted_perceptron_binary` function implements the core algorithm. To optimize execution speed during training, it minimizes unnecessary conversions of python List to NumPy arrays. Instead, it pre-allocates memory arrays (`M_x_arr`, `M_y_arr`) to efficiently track mistakes and updates the survival times (the `C` array) for each constituent perceptron.
 
 ### 2. Batch Evaluation & Confidence Metrics
 The `evaluate_binary` function processes test data in batches to manage memory while calculating weighted kernel matrices. It extracts three specific confidence metrics to analyze the margin of victory:
@@ -57,7 +57,7 @@ This notebook acts as a massive benchmarking experiment. It tests a one-vs-all b
 ## How it Works
 
 ### 1. Optimized Memory Management
-To handle the massive scale of this experiment without severe bottlenecks, the notebook utilizes custom training functions (`train_predict_linear` and `train_predict_kernel`). Instead of using slow Python lists for tracking mistakes, it initializes large, dynamically resizing NumPy arrays (`M_x_arr`, `M_y_arr` starting with a capacity of 100,000). This allows for extremely fast memory allocation during the training phase.
+To handle the massive scale of this experiment without severe bottlenecks, the notebook utilizes custom training functions (`train_predict_linear` and `train_predict_kernel`). Instead of using slow Python lists for tracking mistakes, it preallocates large NumPy arrays (`M_x_arr`, `M_y_arr` starting with a capacity of 100,000). This minimizes unnecessary conversions of python List to NumPy arrays.
 
 ### 2. Batch Matrix Operations for Prediction
 During evaluation, the test set is processed in batches (e.g., `batch_size = 1000`). The notebook computes the weighted kernel matrix for the batch and uses cumulative sums (`np.cumsum`) to efficiently calculate the hypotheses of all intermediate models in the sequence. This allows it to extract the Average, Last, and Vote scores simultaneously.
