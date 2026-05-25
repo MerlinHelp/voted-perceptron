@@ -33,4 +33,11 @@ $(i-1)$-th error) for label $l$
 So far, we have 2 measures of confidence:
 1. The absolute value of the maximum score (i.e. $\max_{\{l \in \mathbb{Z}, 0 \le l \le 9\}}\left|s_l\right|$)
 2. \# of past instances with the same classification as the current
-instance $+1$ ($+1$ counts the current instance).
+instance $+1$ ($+1$ counts the current instance)
+
+## Repository Navigation
+
+* `NOTEBOOK.md` (File) / `notebooks` (Directory): Describes the purpose, contents, and directions of usage for the `*.ipynb` files inside of the `notebooks` directory
+* `TODO.md` (File): A primitive way to view our current tasks (instead of GitHub issues/projects)
+* `src` (Directory): Contains the extracted functions we deem to be essential to conduct our experiments. These will also (hopefully) be tested.
+* `figures` (Directory): Contains any saved figures from our experiments  
