@@ -41,3 +41,27 @@ instance $+1$ ($+1$ counts the current instance)
 * `TODO.md` (File): A primitive way to view our current tasks (instead of GitHub issues/projects)
 * `src` (Directory): Contains the extracted functions we deem to be essential to conduct our experiments. These will also (hopefully) be tested.
 * `figures` (Directory): Contains any saved figures from our experiments  
+* `tests` (Directory): Contains tests using the pytest framework.
+
+## Tests (pytest)
+
+### Testing Environment Setup
+
+1. Install latest version of `pytest`:
+    - `pip install -U pytest`
+    - `pytest --version`
+2. Run `pip install --editable .[test]` inside the project root directory.
+    - Extra documentation below:
+    - [Editable installations](https://setuptools.pypa.io/en/latest/userguide/development_mode.html)
+    - [pyproject.toml explanation](https://hatch.pypa.io/1.16/config/build/#packages)
+
+### Running Tests
+
+1. Run `pytest -q` to run all tests quietly.
+2. Run `pytest -q <test_file.py>` to run a specific test.
+
+
+### Creating Tests
+
+Please view this `pytest` quickstart [link](https://docs.pytest.org/en/stable/getting-started.html#getstarted)
+to get started.
