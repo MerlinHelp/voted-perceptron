@@ -10,47 +10,14 @@ Typical usage example:
   foo = ClassFoo()
   bar = foo.function_bar()
 """
-
 import numpy as np
 import numpy.typing as npt
 from collections.abc import Callable
 
+from voted_perceptron.utils import resize_vector, resize_matrix
+
 INITIAL_CAPACITY = 100_000
 ConfidenceFn = Callable[..., None]
-
-def _resize_vector(
-    arr: npt.NDArray,
-    new_capacity: int
-) -> npt.NDArray:
-    """Resizes a 1D vector by increasing its capacity.
-
-    Args:
-        arr: 1D vector of shape (k,)
-        new_capacity: New size to allocate
-
-    Returns:
-        Resized array of shape (new_capacity,)
-    """
-    new_arr = np.empty((new_capacity,), dtype=arr.dtype)
-    new_arr[:arr.shape[0]] = arr
-    return new_arr
-
-def _resize_matrix(
-    arr: npt.NDArray,
-    new_capacity: int
-) -> npt.NDArray:
-    """Resizes a 2D matrix by increasing row capacity.
-
-    Args:
-        arr: 2D array of shape (r, c)
-        new_capacity: New number of rows
-
-    Returns:
-        Resized array of shape (new_capacity, d)
-    """
-    new_arr = np.empty((new_capacity, arr.shape[1]), dtype=arr.dtype)
-    new_arr[:arr.shape[0], :] = arr
-    return new_arr
 
 def train_linear_voted_perceptron(
     X_train: npt.NDArray[np.float32],
@@ -104,9 +71,9 @@ def train_linear_voted_perceptron(
                 # mistake_count - 1 since c_vec is 1 size greater
                 if mistake_count - 1 >= capacity:
                     capacity *= 2
-                    M_x = _resize_matrix(M_x, capacity)
-                    M_y = _resize_vector(M_y, capacity)
-                    c_vec = _resize_vector(c_vec, capacity)
+                    M_x = resize_matrix(M_x, capacity)
+                    M_y = resize_vector(M_y, capacity)
+                    c_vec = resize_vector(c_vec, capacity)
 
                 M_x[mistake_count] = x_i
                 M_y[mistake_count] = y_i
@@ -179,9 +146,9 @@ def train_kernel_voted_perceptron(
             else:
                 if mistake_count - 1 >= capacity:
                     capacity *= 2
-                    M_x = _resize_matrix(M_x, capacity)
-                    M_y = _resize_vector(M_y, capacity)
-                    c_vec = _resize_vector(c_vec, capacity)
+                    M_x = resize_matrix(M_x, capacity)
+                    M_y = resize_vector(M_y, capacity)
+                    c_vec = resize_vector(c_vec, capacity)
 
                 M_x[mistake_count] = x_i
                 M_y[mistake_count] = y_i
